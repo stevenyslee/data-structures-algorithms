@@ -8,6 +8,17 @@ var dfs = function(r, level) {
     }
 }
 
+var idfs = function(r) {
+    let stack = [r];
+    while (stack.length) {
+        let node = stack.pop();
+        console.log(stack.length, node);
+        for (let i = node.children.length - 1; i >= 0; i--) {
+            stack.push(node.children[i]);
+        }
+    }
+}
+
 var bfs = function(r) {
     let queue = [[r, 0]];
     while (queue.length) {
@@ -21,3 +32,4 @@ var bfs = function(r) {
 
 dfs(root, 0);
 bfs(root);
+idfs(root);
