@@ -24,3 +24,30 @@ var isSameTree = function(p, q) {
     }
     return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 };
+
+var isSameTree = function(p, q) {
+    let pStack = [];
+    let qStack = [];
+    let pNode = p;
+    let qNode = q;
+    while (pStack.length || qStack.length || pNode || qNode) {
+        while (pNode && qNode) {
+            if (pNode.val !== qNode.val) {
+                return false;
+            }
+            pStack.push(pNode);
+            qStack.push(qNode);
+            pNode = pNode.left;
+            qNode = qNode.left;
+        }
+        if ((!pNode && qNode) || (pNode && !qNode)) {
+            return false;
+        }
+        if (pNode && qNode && pNode.val !== qNode.val) {
+            return false;
+        }
+        pNode = pStack.pop().right;
+        qNode = qStack.pop().right;
+    }
+    return true;
+};
